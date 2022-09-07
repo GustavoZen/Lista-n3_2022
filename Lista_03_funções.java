@@ -161,9 +161,8 @@ public class Lista_03_funções {
 			vetor2[i] = entrada.nextInt();
 		}
 		Priorizacao_08(vetor1, vetor2);
-		for (int i : vetor2) {
-			System.out.println(i);
-		}
+		mostrar_vetor(vetor1);
+		mostrar_vetor(vetor2);
 		entrada.close();
 	}
 }
