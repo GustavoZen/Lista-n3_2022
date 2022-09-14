@@ -2,12 +2,13 @@ package lista_03;
 
 import java.util.Scanner;
 
-public class Lista_03_funções {
+@SuppressWarnings("unused")
+public class Lista_03_01x11 {
 	static Scanner entrada = new Scanner(System.in);
 
 	public static int Somatorioimparvetor(int vet[]) {
 		int saida = 0;
-		for (int i = 1; i < vet.length; i+=2) {
+		for (int i = 1; i < vet.length; i += 2) {
 			saida += vet[i];
 		}
 		return saida;
@@ -41,10 +42,8 @@ public class Lista_03_funções {
 	}
 
 	public static int Pesquisa_01(int[] vetor) {
-		Scanner entrada = new Scanner(System.in);
 		System.out.println("Número que será pesquisado :");
 		int num = entrada.nextInt();
-		entrada.close();
 		boolean teste = false;
 		int i = 0;
 		for (i = 0; i < vetor.length; i++) {
@@ -62,10 +61,8 @@ public class Lista_03_funções {
 	}
 
 	public static int Pesquisa_por_indice_02(int vetor[]) {
-		Scanner entrada = new Scanner(System.in);
 		System.out.println("Número de índice :");
 		int indice = entrada.nextInt();
-		entrada.close();
 		if (indice >= vetor.length) {
 			System.out.println("Índice [" + indice + "] não existe no vetor");
 			return 0;
@@ -75,7 +72,7 @@ public class Lista_03_funções {
 		}
 	}
 
-	public static void Separacao_de_valores_03(int vetor[]) {
+	public static void Separacao_de_valores_03_18(int vetor[]) {
 		for (int i = 0; i < vetor.length; i++) {
 			for (int j = i; j < vetor.length; j++) {
 				if (vetor[i] > vetor[j]) {
@@ -155,7 +152,7 @@ public class Lista_03_funções {
 		return vetor2;
 	}
 
-	public static int[] Compactacao(int vet[], int n) {
+	public static int[] Compactacao_10(int vet[], int n) {
 		int inicial = vet[0], cont = 0, aux = 0;
 		int[] vet2;
 		for (int i = 0; i < vet.length; i++) {
@@ -189,23 +186,127 @@ public class Lista_03_funções {
 		return vet2;
 	}
 
-	public static int[] Descompactacao(int vet[],int n) {
+	public static int[] Descompactacao_11(int vet[], int n) {
 		int vet2[] = new int[Somatorioimparvetor(vet)];
+		if (vet2.length % 2 != 0) {
+			System.out.println("O vetor deve ter um número par de tamanho");
+			return vet;
+		}
 		int cont = 0;
-		for (int i = 0; i < vet.length; ) {
+		for (int i = 0; i < vet.length;) {
 			for (int j = 0; j < vet[i + 1]; j++) {
 				vet2[cont + j] = vet[i];
 			}
-			cont += vet[i+1];
-			i+= cont;
+			cont += vet[i + 1];
+			i += cont;
 		}
 		return vet2;
+	}
+
+	public static boolean pesquisarcaractere(char vet[], int i, char c) {
+		if (vet[i] == c)
+			return true;
+		else
+			return false;
+	}
+
+	public static boolean antirepeticao(char vet[], char vet2[], int n) {
+		int cont = 0;
+		for (int i = 0; i < vet.length; i++) {
+			if (vet[n] == vet2[i]) {
+				cont++;
+			}
+		}
+		if (cont >= 1) {
+			return false;
+		} else
+			return true;
+	}
+
+	public static String Contagem_de_caracteres_14(char[] vet) {
+		int cont = 0;
+		String saida = "";
+		char vetaux[] = new char[vet.length];
+		for (int i = 0; i < vet.length; i++) {
+			for (int j = 0; j < vet.length; j++) {
+				if (pesquisarcaractere(vet, j, vet[i])) {
+					cont++;
+				}
+			}
+
+			if (antirepeticao(vet, vetaux, i)) {
+				saida += "" + vet[i] + "=" + cont + " - ";
+			}
+			cont = 0;
+			vetaux[i] = vet[i];
+		}
+		return saida;
+	}
+
+	public static int[] Complementacao_15(int vet[], int vet2[], int tam) {
+		tam = vet.length + vet2.length - maior(vet.length, vet2.length);
+		int vet3[] = new int[tam];
+		for (int i = 0; i < tam; i++)
+			vet3[i] = 10 - vet[i] - vet2[i];
+		return vet3;
+	}
+
+	public static void Polarização_16(int vet[]) {
+		int vetimpar[] = new int[vet.length], vetpar[] = new int[vet.length];
+		int conti = 0, contp = 0, aux = 0;
+		for (int i = 0; i < vetpar.length; i++) {
+			if (vet[i] % 2 == 0) {
+				vetpar[contp] = vet[i];
+				contp++;
+			} else {
+				vetimpar[conti] = vet[i];
+				conti++;
+			}
+		}
+		for (int i = 0; i < vet.length; i++) {
+			vet[i] = vetimpar[i];
+			if (vetimpar[i] == 0) {
+				vet[i] = vetpar[aux];
+				aux++;
+			}
+		}
+	}
+
+	public static int[] Explosao_17(int[] vet, int tam) {
+		tam = Somatorio_04(vet);
+		int vet2[] = new int[tam], cont = 0;
+		for (int i = 0; i < vet.length; i++) {
+			for (int j = 0; j < vet[i]; j++) {
+				vet2[cont] = vet[i];
+				cont++;
+			}
+		}
+		return vet2;
+	}
+
+	public static void Agrupamento_19(int[] vetor) {
+
+	}
+
+	public static void Diferencaa_20(int[] vet, int[] vet2) {
+		int cont = 0;
+		for (int i = 0; i < vet.length; i++) {
+			for (int j = 0; j < vet2.length; j++) {
+				if (vet[i] == vet2[j])
+					cont++;
+			}
+			if (cont == 0) {
+				System.out.println(
+						"O número: " + vet[i] + "\níndice: " + i + " \nExiste no vetor1 mas não existe no vetor 2");
+			}
+			cont = 0;
+		}
 	}
 
 	public static void main(String[] args) {
 		int vetor2[], vetor1[], vetor3[];
 		int n = 0;
-		int tam1 = 0, tam2 = 0,tam3 = 0;
+		int tam1 = 0, tam2 = 0, tam3 = 0;
 		do {
 			System.out.println("Quantos vetores serão utilizados? (máx: 2;mín: 1)");
 			n = entrada.nextInt();
@@ -229,9 +330,7 @@ public class Lista_03_funções {
 		vetor2 = new int[tam2];
 		if (tam2 != 0)
 			povoarvetor(vetor2, 2);
+		Diferencaa_20(vetor1, vetor2);
 		entrada.close();
-		vetor3 = new int [tam3];
-		vetor3 = Descompactacao(vetor1,tam3);
-		mostrar_vetor(vetor3);
 	}
 }
