@@ -2,7 +2,6 @@ package lista_03;
 
 import java.util.Scanner;
 
-@SuppressWarnings("unused")
 public class Lista_03_01x11 {
 	static Scanner entrada = new Scanner(System.in);
 
@@ -21,6 +20,16 @@ public class Lista_03_01x11 {
 		for (int i = 0; i < vetor.length; i++) {
 			System.out.println("Informe o " + (i + 1) + "º elemento da array " + num + ".");
 			vetor[i] = entrada.nextInt();
+		}
+	}
+
+	public static void povoarvetorchar(char[] vetor) {
+		if (vetor.length == 0) {
+			return;
+		}
+		for (int i = 0; i < vetor.length; i++) {
+			System.out.println("Informe o " + (i + 1) + "º elemento do vetor.");
+			vetor[i] = entrada.nextLine().charAt(0);
 		}
 	}
 
@@ -67,7 +76,7 @@ public class Lista_03_01x11 {
 			System.out.println("Índice [" + indice + "] não existe no vetor");
 			return 0;
 		} else {
-			System.out.println("O número do índice " + indice + " da array é: " + vetor[indice]);
+			System.out.println("O número contido no índice " + indice + " da array é: " + vetor[indice]);
 			return vetor[indice];
 		}
 	}
@@ -104,7 +113,7 @@ public class Lista_03_01x11 {
 		return vetoraux;
 	}
 
-	public static int[] Invesao_de_ordem_06(int vetor[]) {
+	public static int[] Inversao_de_ordem_06(int vetor[]) {
 		int aux, fim = vetor.length - 1;
 		for (int i = 0; i < (vetor.length / 2); i++) {
 			aux = vetor[i];
@@ -156,8 +165,10 @@ public class Lista_03_01x11 {
 		int inicial = vet[0], cont = 0, aux = 0;
 		int[] vet2;
 		for (int i = 0; i < vet.length; i++) {
-			if (vet[i] != 1 && vet[i] != 0)
+			if (vet[i] != 1 && vet[i] != 0) {
 				System.out.println("O vetor deve ser composto apenas de \"0's\" e \"1'\"s");
+				return vet;
+			}
 			if (vet[i] != inicial % 2)
 				inicial++;
 		}
@@ -179,9 +190,6 @@ public class Lista_03_01x11 {
 				vet2[aux] = vet[i];
 				vet2[++aux] = cont;
 			}
-		}
-		for (int i : vet2) {
-			System.out.print(i + ",");
 		}
 		return vet2;
 	}
@@ -243,15 +251,15 @@ public class Lista_03_01x11 {
 		return saida;
 	}
 
-	public static int[] Complementacao_15(int vet[], int vet2[], int tam) {
-		tam = vet.length + vet2.length - maior(vet.length, vet2.length);
+	public static int[] Complementacao_15(int vet[], int vet2[]) {
+		int tam = vet.length + vet2.length - maior(vet.length, vet2.length);
 		int vet3[] = new int[tam];
 		for (int i = 0; i < tam; i++)
 			vet3[i] = 10 - vet[i] - vet2[i];
 		return vet3;
 	}
 
-	public static void Polarização_16(int vet[]) {
+	public static void Polarizacao_16(int vet[]) {
 		int vetimpar[] = new int[vet.length], vetpar[] = new int[vet.length];
 		int conti = 0, contp = 0, aux = 0;
 		for (int i = 0; i < vetpar.length; i++) {
@@ -272,8 +280,8 @@ public class Lista_03_01x11 {
 		}
 	}
 
-	public static int[] Explosao_17(int[] vet, int tam) {
-		tam = Somatorio_04(vet);
+	public static int[] Explosao_17(int[] vet) {
+		int tam = Somatorio_04(vet);
 		int vet2[] = new int[tam], cont = 0;
 		for (int i = 0; i < vet.length; i++) {
 			for (int j = 0; j < vet[i]; j++) {
@@ -303,9 +311,10 @@ public class Lista_03_01x11 {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		int vetor2[], vetor1[], vetor3[];
-		int n = 0;
+		int n = 0, r;
 		int tam1 = 0, tam2 = 0, tam3 = 0;
 		do {
 			System.out.println("Quantos vetores serão utilizados? (máx: 2;mín: 1)");
@@ -330,7 +339,87 @@ public class Lista_03_01x11 {
 		vetor2 = new int[tam2];
 		if (tam2 != 0)
 			povoarvetor(vetor2, 2);
-		Diferencaa_20(vetor1, vetor2);
-		entrada.close();
+		System.out.print("Vetor1: ");
+		mostrar_vetor(vetor1);
+		System.out.print("Vetor2: ");
+		mostrar_vetor(vetor2);
+		System.out.println("Qual função quer testar?");
+		System.out.println("1)Pesquisa\n2)Pesquisa por índice\n3)Separação de valores\n4)Somatório"
+				+ "\n5)Junção de vetor\n6)Inversão de Ordem\n7)Inversão de vetores\n8)Priorização"
+				+ "\n10)Compactação\n11)Descompactação\n14)Contagem de caracteres\n15)Complementação"
+				+ "\n16)Polarização\n17)Explosão\n18)Organização\n19)Agrupamento\n20)Diferença-a");
+		r = entrada.nextInt();
+		switch (r) {
+		case 1:
+			System.out.println(Pesquisa_01(vetor1));
+			break;
+		case 2:
+			System.out.println(Pesquisa_por_indice_02(vetor1));
+			break;
+		case 3:
+			Separacao_de_valores_03_18(vetor1);
+			mostrar_vetor(vetor1);
+			break;
+		case 4:
+			System.out.println("O somatório do vetor é: " + Somatorio_04(vetor1));
+			break;
+		case 5:
+			vetor3 = Juncao_de_vetor_05(vetor1, vetor2);
+			mostrar_vetor(vetor3);
+			break;
+		case 6:
+			Inversao_de_ordem_06(vetor1);
+			mostrar_vetor(vetor1);
+			break;
+		case 7:
+			Inversao_de_vetores_07(vetor1, vetor2);
+			System.out.print("Vetor1: ");
+			mostrar_vetor(vetor1);
+			System.out.print("Vetor2: ");
+			mostrar_vetor(vetor2);
+			break;
+		case 8:
+			vetor3 = Priorizacao_08(vetor1, vetor2);
+			mostrar_vetor(vetor3);
+			break;
+		case 10:
+			vetor3 = Compactacao_10(vetor1, n);
+			mostrar_vetor(vetor3);
+			break;
+		case 11:
+			vetor3 = Descompactacao_11(vetor1, n);
+			mostrar_vetor(vetor3);
+			break;
+		case 14:
+			System.out.println("Digite o tamanho do vetor de caracteres: ");
+			tam1 = entrada.nextInt();
+			entrada.nextLine();
+			char vetchar[] = new char[tam1];
+			povoarvetorchar(vetchar);
+			System.out.println(Contagem_de_caracteres_14(vetchar));
+			break;
+		case 15:
+			vetor3 = Complementacao_15(vetor1, vetor2);
+			mostrar_vetor(vetor3);
+			break;
+		case 16:
+			Polarizacao_16(vetor1);
+			mostrar_vetor(vetor1);
+			break;
+		case 17:
+			vetor3 = Explosao_17(vetor1);
+			mostrar_vetor(vetor3);
+			break;
+		case 18:
+			Separacao_de_valores_03_18(vetor1);
+			mostrar_vetor(vetor1);
+			break;
+		case 19:
+			Agrupamento_19(vetor1);
+			break;
+		case 20:
+			Diferencaa_20(vetor1, vetor2);
+			break;
+		}
 	}
 }
